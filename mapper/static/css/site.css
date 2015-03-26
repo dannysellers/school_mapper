@@ -1,0 +1,35 @@
+html {
+    position   : relative;
+    min-height : 100%;
+}
+
+/*body {*/
+/*margin-bottom: 75px;*/
+/*}*/
+
+body > div.container {
+    padding : 65px 15px 0;
+}
+
+#logo {
+    font-size : large;
+}
+
+ul.nav.navbar-nav > li > a {
+    line-height : 28px;
+}
+
+#portland-school-map {
+    width  : 100%;
+    height : 500px;
+}
+
+.coordinates {
+    width : 15rem;
+}
+
+.pre-response {
+    border  : 1px solid black;
+    padding : 1rem;
+    display : none;
+}

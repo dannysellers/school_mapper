@@ -1,0 +1,63 @@
+{% extends 'mapper/base.html' %}
+{% load static %}
+
+{% block title %}
+School Mapper
+{% endblock title %}
+
+{% block body %}
+
+    <div class="row body">
+
+        <div class="col-md-10 col-md-offset-1 col-sm-12">
+            <div id="portland-school-map"></div>
+            <label>Latitude
+                <input id="coordinates-lat" class="coordinates" name="coordinates-lat" value=""/>
+            </label>
+            <label>Longitude
+                <input id="coordinates-lng" class="coordinates" name="coordinates-lng" value=""/>
+            </label>
+            <!-- TODO: Add category and distance options for getSchools, year for getSchoolDetail -->
+            <button name="getschools" id="getschools">Get Schools</button>
+        </div>
+
+        <div class="col-md-10 col-md-offset-1 col-sm-12">
+            <pre class="pre-response" id="json-response"></pre>
+        </div>
+
+    </div>
+
+{% endblock body %}
+
+{% block extra_javascripts %}
+
+    <script type="text/javascript" src="{% static "js/school-mapper.js" %}"></script>
+
+    <script type="text/javascript">
+
+        var map = L.map('portland-school-map').setView([45.5424364, -122.654422], 12);
+
+        L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            minZoom: 11,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+            '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+            'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            id: 'dsellers90.lih1fdj0'
+        }).addTo(map);
+
+        map.on('click', onMapClick);
+
+        $("#getschools").click(function () {
+            var lat = $("#coordinates-lat").val();
+            var lng = $("#coordinates-lng").val();
+            getAllSchools(lat, lng);
+        });
+
+{#        $(".school-link").click(function () {#}
+{#            getSchoolDetail(this.id);#}
+{#        });#}
+
+    </script>
+
+{% endblock extra_javascripts %}
